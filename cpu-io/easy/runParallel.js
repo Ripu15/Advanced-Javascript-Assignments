@@ -9,6 +9,14 @@
 // If any of the asynchronous functions reject, the returned promise
 // should immediately reject with that error.
 
-async function runParallel(functions) {}
+
+//'functions': array of asynchronous functions
+async function runParallel(functions) {
+    let res = [];
+    for(let i = 0; i < functions.length; i++){
+       res[i] =  functions[i]();    
+    }
+    return await Promise.all(res) ;
+}
 
 module.exports = runParallel;

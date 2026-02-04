@@ -10,6 +10,19 @@
 
 const fs = require("fs").promises;
 
-async function checkFileExists(path) {}
+async function checkFileExists(path) {
+      if (path == null) {
+         return false;
+        } 
+    try{
+        await fs.access(path);
+        return true;
+    }catch(err){
+        if(err.code === "ENOENT"){
+            return false;
+        }
+        throw err;
+    }
+}
 
 module.exports = checkFileExists;

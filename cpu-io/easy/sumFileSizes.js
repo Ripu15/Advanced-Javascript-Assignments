@@ -10,7 +10,23 @@
 // 4. Tasks should ideally be performed in parallel for efficiency.
 
 const fs = require("fs").promises;
-
-async function sumFileSizes(filePaths) {}
+//filePaths: array of file paths
+async function sumFileSizes(filePaths) {
+ let sizeSum  = 0;
+ for(const path of filePaths){
+    try{
+        const statsExists = await fs.stat(path);
+        if(statsExists.isFile()){
+           // const stats = await fs.stat(filePaths[i]);
+            let fileSize = statsExists.size;
+            sizeSum = sizeSum + fileSize;
+        }
+    }catch(err){
+        throw err;
+    }
+   
+ }
+ return sizeSum;
+}
 
 module.exports = sumFileSizes;
