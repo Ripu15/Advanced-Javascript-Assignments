@@ -14,24 +14,27 @@
 // This is a prerequisite for common patterns like batching API calls.
 
 function chunkArray(array, size) {
-   let newArr = [];
-   let arrSize = array.length;
-   console.log(arrSize);
-   let rows = arrSize/size ;
-   console.log(rows);
-   let cols = arrSize/rows;
-   console.log(cols);
+  // invalid input
+  if (!Array.isArray(array)) return [];
 
-   if(arrSize <= size){
-    return array;
-   }
-   else{
-    for( let i = 0; i < arrSize; i++ ){
-        // newArr[i][j] =
-         
-    }
-   }
+  // invalid size
+  if (size <= 0) return [];
+
+  // empty array
+  if (array.length === 0) return [];
+
+  // chunk size larger than array
+  if (size >= array.length) return [array];
+
+  const result = [];
+
+  for (let i = 0; i < array.length; i += size) {
+    result.push(array.slice(i, i + size));
+  }
+
+  return result;
 }
-let arr = chunkArray([1,2,3,4,5,6,7,8,9,10], 3);
-console.log(arr);
+// const arr = [1,2,3,4,5,6,7,8,9,10];
+// const matrix = chunkArray(arr, 3);
+// console.log(matrix);
 module.exports = chunkArray;
